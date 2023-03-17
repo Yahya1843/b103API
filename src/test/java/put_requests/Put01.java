@@ -40,7 +40,7 @@ public class Put01 extends JsonPlaceHolderBaseUrl {
         spec.pathParams("first","todos","second",198);
 
         //Set the expected data
-        Map<String,Object> expectedData = new HashMap<>();
+        Map<String,Object> expectedData = new HashMap<>(); // body i map yaptık
         expectedData.put("userId",21);
         expectedData.put("title","Wash the dishes");
         expectedData.put("completed",false);
@@ -52,7 +52,7 @@ public class Put01 extends JsonPlaceHolderBaseUrl {
         response.prettyPrint();
 
         //Do Assertion
-        Map<String,Object> actualData = response.as(HashMap.class);
+        Map<String,Object> actualData = response.as(HashMap.class); // as metodu map yapar
         System.out.println("actualData = " + actualData);
 
         assertEquals(200, response.statusCode());

@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Odev1 extends HerOkuAppBaseUrl {
@@ -25,8 +26,8 @@ public class Odev1 extends HerOkuAppBaseUrl {
         //            i)    Set the URL
         spec.
                 pathParam("first","booking").
-                queryParams("firstname","Almedin",
-                        "lastname","Alikadic");
+                queryParams("firstname","Josh","lastname","Allen");
+
 
         //           ii)   Set the expected data    -- beklenen data
 
@@ -35,7 +36,7 @@ public class Odev1 extends HerOkuAppBaseUrl {
         response.prettyPrint();
 
         //           iv)   Do assertion --
-        response.then().statusCode(200);
+        assertEquals(200,response.statusCode());
         assertTrue(response.asString().contains("bookingid"));
     }
 }

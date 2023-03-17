@@ -43,8 +43,8 @@ public class Get07 extends JsonPlaceHolderBaseUrl {
 
        //Print all ids greater than 190 on the console ==> id si 190 dan buyuk olanlari konsola yazdirin
         JsonPath jsonPath=response.jsonPath();
-        List<Object>list=jsonPath.getList("findAll{it.id>190}.id"); //Groovy Language Java
-        System.out.println("list= "+ list );
+        List<Object>list=jsonPath.getList("findAll{it.id>190}.id"); //Groovy Language Java temelli proğram dilidir
+        System.out.println("list= "+ list );                            // filtreleme yapar
 
         //Assert that there are 10 ids greater than 190 == > 10 tane id nin 190 dan buyuk oldugunu dogrulayin
         assertEquals(10,list.size());
