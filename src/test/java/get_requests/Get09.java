@@ -33,10 +33,10 @@ public class Get09 extends HerOkuAppBaseUrl {
   */
     @Test
     public void get09(){
-        //Set the URL
+        //Set the URL =URL'yi ayarla
         spec.pathParams("first","booking","second",794);
 
-        //Set the expected data
+        //Set the expected data = Beklenen verileri ayarlayın
         Map<String, String> bookingdatesMap = new HashMap<>();
         bookingdatesMap.put("checkin","2018-01-01");
         bookingdatesMap.put("checkout","2019-01-01");
@@ -51,11 +51,11 @@ public class Get09 extends HerOkuAppBaseUrl {
 
         System.out.println("expectedData = " + expectedData);
 
-        //Send the request and get the response
+        //Send the request and get the response=// İsteği gönderin ve yanıtı alın
         Response response = given().spec(spec).get("/{first}/{second}");
         response.prettyPrint();
 
-        //Do Assertion
+        //Do Assertion =Onaylama yapmak
         Map<String, Object> actualData = response.as(HashMap.class);
         System.out.println("actualData = " + actualData);
 

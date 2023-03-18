@@ -37,7 +37,7 @@ public class Patch01 extends JsonPlaceHolderBaseUrl {
         spec.pathParams("first","todos","second",198);
 
         //Set the expected data
-        JsonPlaceHolderTestData obj = new JsonPlaceHolderTestData();
+        JsonPlaceHolderTestData obj = new JsonPlaceHolderTestData(); // değiştimeyeceğimiz yerlere null yazıyoruz
         Map<String, Object> expectedData = obj.expectedDataMethod(null,"Wash the dishes",null);
         System.out.println("expectedData = " + expectedData);
 
