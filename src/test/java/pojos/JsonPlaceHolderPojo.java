@@ -3,6 +3,8 @@ package pojos;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+//benin soruda id yoktu, ama karşıdan gelende id var. gelen id yi ignor için kullanılır
+
 public class JsonPlaceHolderPojo {
         private Integer userId;
         private String title;

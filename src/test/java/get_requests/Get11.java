@@ -44,14 +44,14 @@ public class Get11 extends GoRestBaseUrl {
         Response response=given().spec(spec).get("first");
         response.prettyPrint();
 
-//        iv)  Do assertion = postman egirip terminalindeki datalara göre yazılıyor
+//        iv)  Do assertion = postman e girip terminalindeki datalara göre yazılıyor
         response.
                 then().
-                statusCode(200).
-                body("meta.pagination.limit",equalTo(10),
+                statusCode(200). // postmandan aldık
+                body("meta.pagination.limit",equalTo(10),// limit 10 mu
                         "meta.pagination.links.current",equalTo("https://gorest.co.in/public/v1/users?page=1"),
                         "data",hasSize(10),
-                        "data.status",hasItem("active"),
+                        "data.status",hasItem("active"), // hasItem(içeriyormu) data içerisindeki activeleri verir.
                         "data.name", hasItems("Uttam Varman", "Agniprava Verma Esq.", "Devasree Pandey" ));
                                                 // bu isimleri postman terminalden aldık
 
@@ -70,7 +70,7 @@ public class Get11 extends GoRestBaseUrl {
         assertTrue(kadinSayisi <= genders.size() - kadinSayisi);
 
         //2. Yol: Kadın ve erkek sayılarını Groovy kullanarak karşılaştıralım:
-        List<String> kadinKullaniciList = jsonPath.getList("data.findAll{it.gender=='female'}.gender");
+        List<String> kadinKullaniciList = jsonPath.getList("data.findAll{it.gender=='female'}.gender");//"data.findAll{it.gender=='female'}.name" sadece isimleri yazdırı
         System.out.println("kadinKullaniciList = " + kadinKullaniciList);
         List<String> erkekKullaniciList = jsonPath.getList("data.findAll{it.gender=='male'}.gender");
         System.out.println("erkekKullaniciList = " + erkekKullaniciList);

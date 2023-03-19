@@ -53,7 +53,7 @@ public class Post02 extends HerOkuAppBaseUrl {
         HerOkuAppTestData obj = new HerOkuAppTestData();
         Map<String, String> bookingdatesMap = obj.bookingdatesMapMethod("2021-09-09", "2021-09-21");
         Map<String, Object> expectedData = obj.expectedDataMethod("John", "Doe", 11111, true, bookingdatesMap, null);
-        System.out.println("expectedData = " + expectedData);
+        System.out.println("expectedData = " + expectedData); // expected data oluşturup post request yaptık ve karşıdan gelen data ile karşılaştırdık
 
         //Send the request and get the response
         Response response = given().spec(spec).body(expectedData).post("{first}");
@@ -63,7 +63,7 @@ public class Post02 extends HerOkuAppBaseUrl {
         Map<String , Object> actualData = response.as(HashMap.class);
         System.out.println("actualData = " + actualData);
 
-        assertEquals(200, response.statusCode());
+        assertEquals(200, response.statusCode()); // ilk önce status code kontrol edilir
         assertEquals(expectedData.get("firstname"),((Map)actualData.get("booking")).get("firstname"));
         assertEquals(expectedData.get("lastname"),((Map)actualData.get("booking")).get("lastname"));
         assertEquals(expectedData.get("totalprice"),((Map)actualData.get("booking")).get("totalprice"));
