@@ -1,8 +1,10 @@
 package post_requests;
 
 import base_urls.ReqresBaseUrl;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import org.testng.annotations.Test;
 import pojos.JsonPlaceHolderPojo;
 import pojos.RegresPojo;
@@ -10,6 +12,7 @@ import pojos.RegresPojo;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -48,23 +51,35 @@ public class odev1_2_3 extends ReqresBaseUrl {
         response.prettyPrint();
 
         //        iv)  Do assertion
+        response.
+                then().
+                statusCode(200).
+                contentType(ContentType.JSON).
+                body("data",hasSize(6));
+
+        //        1)Status code is 200
+        response.then().assertThat().statusCode(200);
+        //        2)Print all pantone_values
         JsonPath jsonPath= response.jsonPath();
         List<String> pantone_value = jsonPath.getList("data.pantone_value");
         System.out.println("pantone_value = " + pantone_value);
 
-        List<String> id = jsonPath.getList("data.id");
-        System.out.println("id = " + id);
+      //  List<String> id = jsonPath.getList("data.id");
+       // System.out.println("id = " + id);
 
-        List<String> id_üctenBüyük = jsonPath.getList("data.findAll{it.id>3}.id");//"data.findAll{it.gender=='female'}.name" sadece isimleri yazdırı
+        //        3)Print all ids greater than 3 on the console
+        List<Integer> id_üctenBüyük = jsonPath.getList("data.findAll{it.id>3}.id");//"data.findAll{it.gender=='female'}.name" sadece isimleri yazdırı
         System.out.println("id_üctenBüyük = " + id_üctenBüyük);
 
-        assertTrue(id_üctenBüyük.size() == 3);
+//        Assert that there are 3 ids greater than 3
+        Assert.assertEquals(3, id_üctenBüyük.size());
 
+        //        4)Print all names whose ids are less than 3 on the console
         List<String> id_ikidenKücük = jsonPath.getList("data.findAll{it.id<3}.name");//"data.findAll{it.gender=='female'}.name" sadece isimleri yazdırı
         System.out.println("id_ikidenKücük = " + id_ikidenKücük);
 
-        assertTrue(id_ikidenKücük.size() == 2);
-
+//        Assert that the number of names whose ids are less than 3 is 2
+        Assert.assertEquals(2,id_ikidenKücük.size());
 
     }
 //2)
@@ -91,7 +106,7 @@ public class odev1_2_3 extends ReqresBaseUrl {
     @Test
     public void odev02() {
         //Set the URL
-        spec.pathParams("first", "unknown");
+        spec.pathParam("first", "users");
 
         //Set the expected data
         RegresPojo expectedData = new RegresPojo( "morpheus", "leader");
