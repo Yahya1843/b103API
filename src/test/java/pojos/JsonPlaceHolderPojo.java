@@ -1,17 +1,16 @@
 package pojos;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-//benin soruda id yoktu, ama karşıdan gelende id var. gelen id yi ignor için kullanılır
-
 public class JsonPlaceHolderPojo {
-        private Integer userId;
-        private String title;
-        private Boolean completed;
+
+    private Integer userId;
+    private String title;
+    private Boolean completed;
 
     public JsonPlaceHolderPojo() {
-
     }
 
     public JsonPlaceHolderPojo(Integer userId, String title, Boolean completed) {
@@ -19,6 +18,7 @@ public class JsonPlaceHolderPojo {
         this.title = title;
         this.completed = completed;
     }
+
 
     public Integer getUserId() {
         return userId;
@@ -46,10 +46,12 @@ public class JsonPlaceHolderPojo {
 
     @Override
     public String toString() {
-        return "JsonPlaceHlderPojo{" +
+        return "JsonPlaceHolderPojo{" +
                 "userId=" + userId +
                 ", title='" + title + '\'' +
                 ", completed=" + completed +
                 '}';
     }
 }
+
+

@@ -9,7 +9,9 @@ import org.testng.annotations.Test;
 import pojos.JsonPlaceHolderPojo;
 import pojos.RegresPojo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
@@ -127,10 +129,74 @@ public class odev1_2_3 extends ReqresBaseUrl {
 
 
     }
+
+    /* 2. yol
+    @Test
+    public void post01(){
+        spec.pathParam("first", "users");
+        ReqresTestData reqresTestData = new ReqresTestData();//Map oluşturacak method oluşturunuz
+        Map<String,String > expectedData = reqresTestData.reqresUsersSetUp("morpheus","leader");
+        System.out.println("expectedData = " + expectedData);
+
+        Response response = given().spec(spec).contentType(ContentType.JSON).body(expectedData).when().post("/{first}");
+        response.prettyPrint();
+
+        Map<String,String> actualData = response.as(HashMap.class);
+        System.out.println("actualData = " + actualData);
+
+        Assert.assertEquals(201, response.getStatusCode());
+        Assert.assertEquals(expectedData.get("name"),actualData.get("name"));
+        Assert.assertEquals(expectedData.get("job"),actualData.get("job"));
+     */
 //3)
 
 /*
    "https://petstore.swagger.io/" dökümanını kullanarak 'user' oluşturacak bir otomasyon testi yazınız
     Not: Test Case'i gherkin language ile yazınız.
 */
+    /*
+    iven
+            1) https://petstore.swagger.io/v2/user
+            2) {
+                  "username": "JohnDoe",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "email": "john@doe.com",
+                  "password": "1234",
+                  "phone": "1234",
+                  "userStatus": 123
+                }
+        When
+            I send POST Request to the Url
+        Then
+            Status code is 200
+            And response body should be like {
+                                                "code": 200,
+                                                "type": "unknown",
+                                                "message": "6874988058"
+                                             }
+     */
+
+    @Test
+    public void post01() {
+        spec.pathParam("first", "user");
+        Map<String, Object> expectedData = new HashMap<>();//Pojo class ile de payload oluşturabilirsiniz
+        expectedData.put("username", "JohnDoe");
+        expectedData.put("firstName", "John");
+        expectedData.put("lastName", "Doe");
+        expectedData.put("email", "john@doe.com");
+        expectedData.put("password", "1234");
+        expectedData.put("phone", "1234");
+        expectedData.put("userStatus", 123);
+
+        Response response = given().spec(spec).contentType(ContentType.JSON).body(expectedData).when().post("/{first}");
+        response.prettyPrint();
+
+        Map<String ,Object> actualData =response.as(HashMap.class);
+        assertEquals(200,response.statusCode());
+        assertEquals(200,actualData.get("code"));
+        assertEquals("unknown",actualData.get("type"));
+    }
+
+
 }
